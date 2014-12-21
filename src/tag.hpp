@@ -40,6 +40,26 @@ namespace Mpc
       void SetAlbum(Mpc::Song * song, std::string const & filePath, const char * album);
 
 #ifdef TAG_SUPPORT
+      // ADDED BY JESSICAT
+      void SetComment(Mpc::Song * song, std::string const & filePath, const char * comment) {
+         TagLib::FileRef file(filePath.c_str());
+
+         if ((file.isNull() == false) && (file.tag() != NULL))
+         {
+            file.tag()->setComment(comment);
+
+            if (file.save() == true)
+            {
+               Debug("Edit comment tag of %s to %s", filePath.c_str(), comment);
+               song->SetComment(comment);
+            }
+         }
+         else
+         {
+            ErrorString(ErrorNumber::FileNotFound);
+         }
+      }
+      // END
       void SetArtist(Mpc::Song * song, std::string const & filePath, const char * artist)
       {
          TagLib::FileRef file(filePath.c_str());
@@ -124,6 +144,7 @@ namespace Mpc
       std::string Album(std::string const & filePath);
       std::string Title(std::string const & filePath);
       std::string Track(std::string const & filePath);
+      std::string Comment(std::string const & filePath);
 
 #else
       void SetArtist(Mpc::Song * song, std::string const & filePath, const char * artist) {}

@@ -711,11 +711,13 @@ void Command::Substitute(std::string const & expression)
       modifyFunctions["b"] = &Mpc::Tag::SetAlbum;
       modifyFunctions["t"] = &Mpc::Tag::SetTitle;
       modifyFunctions["n"] = &Mpc::Tag::SetTrack;
+      modifyFunctions["c"] = &Mpc::Tag::SetComment;
 
       readFunctions["a"] = &Mpc::Song::Artist;
       readFunctions["b"] = &Mpc::Song::Album;
       readFunctions["t"] = &Mpc::Song::Title;
       readFunctions["n"] = &Mpc::Song::Track;
+      readFunctions["c"] = &Mpc::Song::Comment;
    }
 
    std::string match, substitution, options;

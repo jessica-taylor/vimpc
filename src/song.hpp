@@ -132,6 +132,29 @@ namespace Mpc
       void SetEntry(LibraryEntry * entry);
       LibraryEntry * Entry() const;
 
+      // ADDED BY JESSICAT
+      void SetComment(const char * comment) {
+         lastFormat_ = "";
+         if (comment != NULL) {
+            comment_ = comment;
+         }
+      }
+      std::string const & Comment() const { return comment_; }
+      std::string const & Stars() const {
+         int num = 0;
+         if (comment_.size() != 0) {
+            num = comment_[0] - '0';
+         }
+         std::string stars = "     ";
+         if (num >= 0 && num <= 5) {
+            for (int i = 0; i < num; ++i) {
+               stars[i] = '*';
+            }
+         }
+         return stars;
+      }
+      // END
+
       std::string FormatString(std::string fmt) const;
       std::string ParseString(std::string::const_iterator &it, bool &valid) const;
 
@@ -180,6 +203,10 @@ namespace Mpc
       mutable std::string formatted_;
 
       LibraryEntry * entry_;
+
+      // ADDED BY JESSICAT
+      std::string comment_;
+      // END
    };
 }
 

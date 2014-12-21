@@ -2407,6 +2407,8 @@ Song * Client::CreateSong(mpd_song const * const song) const
    newSong->SetDisc       (mpd_song_get_tag(song, MPD_TAG_DISC, 0));
    newSong->SetDuration   (mpd_song_get_duration(song));
    newSong->SetVirtualEnd (mpd_song_get_end(song));
+   // ADDED BY JESSICAT
+   newSong->SetComment    (mpd_song_get_tag(song, MPD_TAG_COMMENT, 0));
 
    return newSong;
 }
